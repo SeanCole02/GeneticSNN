@@ -1,0 +1,7 @@
+torch
+snntorch
+torchvision
+matplotlib
+numpy
+pyJoules
+pynvml

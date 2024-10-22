@@ -4,6 +4,7 @@ from snntorch import spikegen
 
 import torch
 import torch.nn as nn
+from torch.ao.nn.quantized.functional import threshold
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
@@ -98,6 +99,7 @@ num_outputs = 10
 # Temporal Dynamics
 num_steps = 25
 beta = 0.95
+threshold = 1.0
 
 
 # Define Network
@@ -107,9 +109,9 @@ class Net(nn.Module):
 
         # Initialize layers
         self.fc1 = nn.Linear(num_inputs, num_hidden)
-        self.lif1 = snn.Leaky(beta=beta)
+        self.lif1 = snn.Leaky(beta=beta, threshold=threshold)
         self.fc2 = nn.Linear(num_hidden, num_outputs)
-        self.lif2 = snn.Leaky(beta=beta)
+        self.lif2 = snn.Leaky(beta=beta, threshold=threshold)
 
     def forward(self, x):
 

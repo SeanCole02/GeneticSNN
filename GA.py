@@ -51,15 +51,13 @@ class GA:
         return mutated_value
 
     def _mutate(self) -> dict:
-        mutated_beta = self._random_float_gene("beta")
-        mutated_threshold = self._random_float_gene("threshold")
-        mutated_num_steps = self._random_float_gene("num_steps")
-        mutated_num_hidden = self._random_float_gene("num_hidden")
-        self.beta = mutated_beta
-        self.threshold = mutated_threshold
-        self.num_steps = mutated_num_steps
-        self.num_hidden = mutated_num_hidden
-        return self.beta
+        (self.beta,
+         self.threshold,
+         self.num_steps,
+         self.num_hidden) = (self._random_float_gene("beta"),
+                                self._random_float_gene("threshold"),
+                                self._random_float_gene("num_steps"),
+                                self._random_float_gene("num_hidden"))
 
     def _adjust_sigma(self, adjustment):
         if adjustment == "decay":
